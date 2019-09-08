@@ -27,21 +27,39 @@ We set the Asimov’s ZMP trajectory as reference. Both along X, as well as Y co
 ![](images/zmpref.JPG)
 
 Followed the following article: https://ieeexplore.ieee.org/xpls/icp.jsp?arnumber=4633623 
-In every iteration the reward is negative the distance between the reference ZMP and the robot’s actual ZMP. 
-reward = sqrt( distanceX^2 + distanceY^2 ) 
-If the height of the Sphere is less than 0.82 -> robot falls down: 
-reward += -250 + at which iteration are we at quit simulation 
-If the robot didn’t fall, and at the end of simulation the absolute distance from target and real ZMP is less than 5: 
-reward += 200 done simulation 
-Architecture: 
-Environment - this classes defines the environment; makes the connection python - vrep; starts, stop, resets the simulation; moves the robot joints accordingly, one step at a time; calculates reward 
-Model - multilayer perceptron model with two hidden layers (first 500 nodes, second 1500 nodes with ReLu activation function), last layer 255 nodes according to the action space, with linear activation function. Loss function: mean squared error ( [target Q values - network’s output]^2 ). Optimizer: Adam. 
-Memory - stores state, action, reward, next state ​tuples. From here we retrieve a defined amount of random samples (batches) to train the network. 
-SimRunner - this class is where the model dynamics, agent action and training is organised 
-State - in this class are organised the state variables 
-ZMP - this class defines the reference ZMP, and reward calculation 
-Visu_JSON - class holding methods for visualization 
-Algorithm steps: 
+
+
+In every iteration the reward is the negative distance between the reference ZMP and the robot’s actual ZMP.  
+
+<p align="center">
+reward = sqrt( distanceX^2 + distanceY^2 )
+</p>
+
+If the height of the Sphere is less than 0.82 -> robot falls down:  
+
+<p align="center">
+*reward += -250 + at which iteration are we at quit simulation*
+</p>
+
+If the robot didn’t fall, and at the end of simulation the absolute distance from target and real ZMP is less than 5:  
+
+<p align="center">
+*reward += 200 done simulation*
+</p>
+
+
+## Architecture: 
+
+**Environment** - this classes defines the environment; makes the connection python - vrep; starts, stop, resets the simulation; moves the robot joints accordingly, one step at a time; calculates reward  
+**Model** - multilayer perceptron model with two hidden layers (first 500 nodes, second 1500 nodes with ReLu activation function), last layer 255 nodes according to the action space, with linear activation function. Loss function: mean squared error ( [target Q values - network’s output]^2 ). Optimizer: Adam.  
+**Memory** - stores state, action, reward, next state ​tuples. From here we retrieve a defined amount of random samples (batches) to train the network.  
+**SimRunner** - this class is where the model dynamics, agent action and training is organised  
+**State** - in this class are organised the state variables  
+**ZMP** - this class defines the reference ZMP, and reward calculation  
+**Visu_JSON** - class holding methods for visualization  
+
+## Algorithm steps: 
+
 Initialize Environment Set batchsize Set epsilon greedy policy variables (exploitation - exploration) Set discount factor Set episodes Initialize Model Initialize Memory Initialize SimRunner 
 for i = 1, episodes: 
 Set model into initial conditions (env.reset()) while task not done ​or not fall: (​begin​ - simrunner.run()) 
