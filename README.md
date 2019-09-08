@@ -39,6 +39,8 @@ If the height of the Sphere is less than 0.82 -> robot falls down:
 
 <p align="center">
 reward += -250 + at which iteration are we at  
+</p>
+<p align="center">
 quit simulation
 </p>
 
@@ -46,6 +48,8 @@ If the robot didn’t fall, and at the end of simulation the absolute distance f
 
 <p align="center">
 reward += 200  
+  </p>
+ <p align="center"> 
 done simulation
 </p>
 
