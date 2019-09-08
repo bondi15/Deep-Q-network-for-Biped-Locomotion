@@ -24,7 +24,7 @@ Number of possible actions: 27.
 
 We set the Asimov’s ZMP trajectory as reference. Both along X, as well as Y coordinates: 
 
-
+![](images/zmpref.JPG)
 
 Followed the following article: https://ieeexplore.ieee.org/xpls/icp.jsp?arnumber=4633623 
 In every iteration the reward is negative the distance between the reference ZMP and the robot’s actual ZMP. 
