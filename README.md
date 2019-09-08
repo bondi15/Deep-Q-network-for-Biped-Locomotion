@@ -66,17 +66,40 @@ done simulation
 
 ## Algorithm steps: 
 
-Initialize *Environment* Set batchsize Set epsilon greedy policy variables (exploitation - exploration) Set discount factor Set episodes Initialize Model Initialize Memory Initialize SimRunner 
-for i = 1, episodes: 
-Set model into initial conditions (env.reset()) while task not done ​or not fall: (​begin​ - simrunner.run()) 
-Run one step (env.step()) Memory ← (state, action, reward, next_state) 
-(​begin​ - simrunner.replay()) Sample batches from Memory QSA ← Predict states’ Q values (output from current network for the state input) 
-QSAD ← Predict next_states’ Q values for ind, elements in batch: 
-current_Q ← QSA[ind] if next_state​ is None: (if next_state is None -> the task was done) 
-current_Q[chosen action’s index corresponding output layer’s node index] ← reward 
-else: 
-current_Q[chosen action’s index corresponding output layer’s node index] ← reward + discount_factor * max(QSAD[ind]) 
-x[ind] ​← state y[ind] ← current_Q 
-Train model with batch (backpropogation, minimizing loss function, current_Q is what should output the network, moves the gradient in that position) 
-(end - simrunner.replay()) (end - simrunner.run()) 
+    Initialize Environment  
+    Set batchsize  
+    Set epsilon greedy policy variables (exploitation - exploration)  
+    Set discount factor  
+    Set episodes  
+    Initialize Model  
+    Initialize Memory
+    Initialize SimRunner
+
+    for i = 1, episodes:   
+        Set model into initial conditions (env.reset())
+        while task not done or not fall: (begin - simrunner.run())
+            Run one step (env.step()) 
+            Memory ← (state, action, reward, next_state)  
+        
+            (begin​ - simrunner.replay()) 
+            Sample batches from Memory 
+            QSA ← Predict states’ Q values (output from current network for the state input) 
+            QSAD ← Predict next_states’ Q values 
+        
+            for ind, elements in batch: 
+                current_Q ← QSA[ind]
+                if next_state is None: (if next_state is None -> the task was done) 
+                    current_Q[chosen action’s index corresponding output layer’s node index] ← reward 
+                else: 
+                    current_Q[chosen action’s index corresponding output layer’s node index] ← reward + discount_factor * max(QSAD[ind]) 
+            
+                x[ind] ​← state
+                y[ind] ← current_Q 
+          
+            Train model with batch (backpropogation, minimizing loss function, current_Q is what should output the network, moves the gradient in that position)
+        
+            (end - simrunner.replay())
+        (end - simrunner.run())
+        
+        
 IN ORDER TO RUN FILE PATHS MUST BE MODIFIED 
