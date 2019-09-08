@@ -38,13 +38,15 @@ reward = sqrt( distanceX^2 + distanceY^2 )
 If the height of the Sphere is less than 0.82 -> robot falls down:  
 
 <p align="center">
-*reward += -250 + at which iteration are we at quit simulation*
+reward += -250 + at which iteration are we at  
+quit simulation
 </p>
 
 If the robot didn’t fall, and at the end of simulation the absolute distance from target and real ZMP is less than 5:  
 
 <p align="center">
-*reward += 200 done simulation*
+reward += 200  
+done simulation
 </p>
 
 
@@ -60,7 +62,7 @@ If the robot didn’t fall, and at the end of simulation the absolute distance f
 
 ## Algorithm steps: 
 
-Initialize Environment Set batchsize Set epsilon greedy policy variables (exploitation - exploration) Set discount factor Set episodes Initialize Model Initialize Memory Initialize SimRunner 
+Initialize *Environment* Set batchsize Set epsilon greedy policy variables (exploitation - exploration) Set discount factor Set episodes Initialize Model Initialize Memory Initialize SimRunner 
 for i = 1, episodes: 
 Set model into initial conditions (env.reset()) while task not done ​or not fall: (​begin​ - simrunner.run()) 
 Run one step (env.step()) Memory ← (state, action, reward, next_state) 
