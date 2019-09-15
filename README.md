@@ -101,5 +101,4 @@ done simulation
             (end - simrunner.replay())
         (end - simrunner.run())
         
-        
-IN ORDER TO RUN FILE PATHS MUST BE MODIFIED 
+
