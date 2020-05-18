@@ -57,7 +57,7 @@ done simulation
 ## Architecture: 
 
 **Environment** - this classes defines the environment; makes the connection python - vrep; starts, stop, resets the simulation; moves the robot joints accordingly, one step at a time; calculates reward  
-**Model** - multilayer perceptron model with two hidden layers (first 500 nodes, second 1500 nodes with ReLu activation function), last layer 255 nodes according to the action space, with linear activation function. Loss function: mean squared error ( [target Q values - network’s output]^2 ). Optimizer: Adam.  
+**Model** - multilayer perceptron model with two hidden layers (first 500 nodes, second 1500 nodes with ReLu activation function), last layer 27 nodes according to the action space, with linear activation function. Loss function: mean squared error ( [target Q values - network’s output]^2 ). Optimizer: Adam.  
 **Memory** - stores state, action, reward, next state ​tuples. From here we retrieve a defined amount of random samples (batches) to train the network.  
 **SimRunner** - this class is where the model dynamics, agent action and training is organised  
 **State** - in this class are organised the state variables  
